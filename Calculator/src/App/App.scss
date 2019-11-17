@@ -1,0 +1,23 @@
+$primary: #EBBE9B;
+$primary-dark: #E7A977;
+$secondary: #C7CB85;
+$secondary-dark: #7EA172;
+$dark: #502419;
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    height: 100vh;
+    background: linear-gradient(to top, #999, #333) no-repeat center center fixed; 
+    background-repeat: no-repeat;
+}
