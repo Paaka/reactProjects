@@ -6,8 +6,10 @@ class App extends React.Component{
     state = {  
         arr:[""] ,
         value :  0,
+        operator : "plus",
         plusState: false,
     }   
+
     addValueFn = (e) =>{
         const lengthOfArr = this.state.arr.length-1;
         const input = e.target.value;
@@ -21,31 +23,75 @@ class App extends React.Component{
         })
     }
 
+    doMathFn(operator){
+        
+        const  result = this.doSpecificMathFn(operator, this.state.arr);       
+        
+        this.setState({
+            value:result,
+            arr: [""],
+            plusState:false,
+        })
+    }
+
+    doSpecificMathFn(operator, arr){
+       let result = 0;
+       let firstItem, secondItem;
+       if(arr[0] === ""){
+            firstItem = 0;
+       }else{
+        firstItem = parseFloat(arr[0]);
+       }
+       if(arr[1] === ""){
+           secondItem = 0;
+       }else{
+         secondItem = parseFloat(arr[1]);
+       }   
+       
+       switch(operator){
+            case "plus":{
+                result = firstItem + secondItem;;   
+                break;   
+            }
+            case "minus":{
+                result = firstItem - secondItem;;
+                break;
+            }
+            case "times":{
+                result = firstItem * secondItem;;
+                break;
+            }
+                
+                   default:{
+                       console.log('Error');
+                   }
+                }
+
+       return result;
+    }
+
     handleAddingFn = () =>{
         if(this.state.plusState){
-            let result = 0;
-            this.state.arr.forEach(v=>{
-                if(v ===""){
-                    v=0;
-                }
-                result += parseFloat(v);
-            })
+            this.doMathFn(this.state.operator);
             this.setState({
-                value:result,
-                arr: [""]
+                plusState:false,
             })
-            
         }else{
             this.setState(prevState =>({
                 arr :[...prevState.arr, ""],
-                plusState: !this.state.plusState,
+                plusState: true,
+                operator: "plus"
             }))
         }
         
     }
 
-    handleEqualFn = () =>{
+    handleMinusFn = () => {
 
+    }
+
+    handleEqualFn = () =>{
+       this.doMathFn(this.state.operator)
     }
 
     render(){

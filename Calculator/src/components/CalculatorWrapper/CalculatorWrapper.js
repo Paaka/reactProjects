@@ -94,7 +94,7 @@ const CalculatorWrapper = (props)=>(
           value=".">
            ,
          </Btn>
-         <Btn>
+         <Btn x={props.equal}>
            =
          </Btn>
     </div>
