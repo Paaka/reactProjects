@@ -4,14 +4,26 @@ import CalcWrapper from '../components/CalculatorWrapper/CalculatorWrapper'
 
 class App extends React.Component{
     state = {  
-        arr:[1] ,
+        arr:[""] ,
         value :  1,
     }   
     addValueFn = (e) =>{
-        const lengthOfArr = this.state.arr.length;
-        this.setState({
-            arr : [this.state.arr[lengthOfArr-1] + e.target.value],
-        })
+        const lengthOfArr = this.state.arr.length-1;
+        const input = e.target.value;
+        // console.log(lengthOfArr);
+        // this.setState({
+        //    arr : [...this.state.arr, this.state.arr[lengthOfArr-1] +input],
+        // })
+        this.state.arr[lengthOfArr] += e.target.value;
+        this.forceUpdate();
+
+        // this.setState(prevState =>({
+        //     arr :[...prevState.arr, prevState.arr[lengthOfArr] = 23],
+        //     arr : update()
+        //     value: prevState.value+input
+        // }))
+
+        
     }
 
     idk = (e) =>{
@@ -22,9 +34,9 @@ class App extends React.Component{
     }
 
     addOne = () =>(
-        this.setState({
-            value: parseInt(this.state.value) +1,
-        })
+        this.setState(prevState =>({
+            arr :[...prevState.arr, this.state.arr.push("")],
+        }))
     )
 
     render(){
