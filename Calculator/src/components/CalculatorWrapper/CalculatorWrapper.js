@@ -90,7 +90,8 @@ const CalculatorWrapper = (props)=>(
           value="0">
            0
          </Btn>
-         <Btn>
+         <Btn x={props.addValueFn}
+          value=".">
            ,
          </Btn>
          <Btn>

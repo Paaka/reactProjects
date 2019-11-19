@@ -5,45 +5,59 @@ import CalcWrapper from '../components/CalculatorWrapper/CalculatorWrapper'
 class App extends React.Component{
     state = {  
         arr:[""] ,
-        value :  1,
+        value :  0,
+        plusState: false,
     }   
     addValueFn = (e) =>{
         const lengthOfArr = this.state.arr.length-1;
         const input = e.target.value;
-        // console.log(lengthOfArr);
-        // this.setState({
-        //    arr : [...this.state.arr, this.state.arr[lengthOfArr-1] +input],
-        // })
         this.state.arr[lengthOfArr] += e.target.value;
-        this.forceUpdate();
-
-        // this.setState(prevState =>({
-        //     arr :[...prevState.arr, prevState.arr[lengthOfArr] = 23],
-        //     arr : update()
-        //     value: prevState.value+input
-        // }))
-
-        
+        this.forceUpdate();    
     }
 
-    idk = (e) =>{
-        console.log(this.state.value)
+    handleValueChange = (e) =>{
         this.setState({
             value:e.target.value,
         })
     }
 
-    addOne = () =>(
-        this.setState(prevState =>({
-            arr :[...prevState.arr, this.state.arr.push("")],
-        }))
-    )
+    handleAddingFn = () =>{
+        if(this.state.plusState){
+            let result = 0;
+            this.state.arr.forEach(v=>{
+                if(v ===""){
+                    v=0;
+                }
+                result += parseFloat(v);
+            })
+            this.setState({
+                value:result,
+                arr: [""]
+            })
+            
+        }else{
+            this.setState(prevState =>({
+                arr :[...prevState.arr, ""],
+                plusState: !this.state.plusState,
+            }))
+        }
+        
+    }
+
+    handleEqualFn = () =>{
+
+    }
 
     render(){
         return(
             <>
              <h1>Hello</h1>
-            <CalcWrapper add={this.addOne} valueOfInput={this.state.arr[0].value} henge={this.idk} addValueFn={this.addValueFn}></CalcWrapper>
+            <CalcWrapper 
+            add={this.handleAddingFn} 
+            valueOfInput={this.state.value} 
+            henge={this.handleValueChange} 
+            equal={this.handleEqualFn}
+            addValueFn={this.addValueFn}></CalcWrapper>
             </>
         )
     }
