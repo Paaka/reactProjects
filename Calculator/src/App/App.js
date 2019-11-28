@@ -5,22 +5,29 @@ import CalcWrapper from '../components/CalculatorWrapper/CalculatorWrapper'
 class App extends React.Component{
     state = {  
         arr:[""] ,
-        value :  0,
+        value :  "",
         operator : "plus",
         plusState: false,
     }   
 
     addValueFn = (e) =>{
         const lengthOfArr = this.state.arr.length-1;
-        const input = e.target.value;
         this.state.arr[lengthOfArr] += e.target.value;
+        this.handleValueUpdate(e);
         this.forceUpdate();    
     }
 
-    handleValueChange = (e) =>{
-        this.setState({
-            value:e.target.value,
-        })
+    handleValueUpdate = (e) =>{
+        const magic = e.target.value;
+        this.setState((prevState) => ({
+            value:prevState.value + magic
+        }))
+    }
+
+    setValueToEmptyString = () =>{
+        this.setState((prevState) => ({
+            value:"",
+        }))
     }
 
     doMathFn(operator){
@@ -82,6 +89,7 @@ class App extends React.Component{
                 plusState: true,
                 operator: "plus"
             }))
+            this.setValueToEmptyString();
         }
         
     }
@@ -101,7 +109,7 @@ class App extends React.Component{
             <CalcWrapper 
             add={this.handleAddingFn} 
             valueOfInput={this.state.value} 
-            henge={this.handleValueChange} 
+            henge={this.handleValueUpdate} 
             equal={this.handleEqualFn}
             addValueFn={this.addValueFn}></CalcWrapper>
             </>
