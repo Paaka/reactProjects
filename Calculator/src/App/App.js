@@ -8,9 +8,10 @@ class App extends React.Component{
         value :  "",
         operator : "plus",
         plusState: false,
+        minusState:false,
     }   
 
-    addValueFn = (e) =>{
+    addValueToArrayOfNumbers = (e) =>{
         const lengthOfArr = this.state.arr.length-1;
         this.state.arr[lengthOfArr] += e.target.value;
         this.handleValueUpdate(e);
@@ -77,22 +78,32 @@ class App extends React.Component{
        return result;
     }
 
-    handleAddingFn = () =>{
-        if(this.state.plusState){
+    handleAddingFn = (e) =>{
+        console.log(e.target.id)
+        const currentOperator = this.getOperatorState(e.target.id);
+   
+        if(currentOperator.valueOfThisState){
             this.doMathFn(this.state.operator);
             this.setState({
-                plusState:false,
+                [currentOperator.stateId]:false,
             })
         }else{
-            this.setState(prevState =>({
+            this.setState((prevState,porps) =>({
                 arr :[...prevState.arr, ""],
-                plusState: true,
-                operator: "plus"
+                [currentOperator.stateId]: true,
+                operator: currentOperator.symbol,
             }))
             this.setValueToEmptyString();
         }
         
     }
+
+    getOperatorState =(id) =>({
+            symbol:id,
+            stateId:`${id}State`,
+            // eslint-disable-next-line no-eval
+            valueOfThisState: eval(`this.state.${id}State`)
+    })
 
     handleMinusFn = () => {
 
@@ -111,7 +122,7 @@ class App extends React.Component{
             valueOfInput={this.state.value} 
             henge={this.handleValueUpdate} 
             equal={this.handleEqualFn}
-            addValueFn={this.addValueFn}></CalcWrapper>
+            addValueToArrayOfNumbers={this.addValueToArrayOfNumbers}></CalcWrapper>
             </>
         )
     }

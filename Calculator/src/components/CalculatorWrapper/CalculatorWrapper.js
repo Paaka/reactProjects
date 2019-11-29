@@ -30,17 +30,17 @@ const CalculatorWrapper = (props)=>(
           &#8725;
          </Btn>
          <Btn 
-         x={props.addValueFn}
+         onClickFn={props.addValueToArrayOfNumbers}
          value="1">
              1
          </Btn>
          <Btn
-          x={props.addValueFn}
+          onClickFn={props.addValueToArrayOfNumbers}
           value="2">
              2
          </Btn>
          <Btn 
-         x={props.addValueFn}
+         onClickFn={props.addValueToArrayOfNumbers}
         value="3">
              3
          </Btn>
@@ -48,53 +48,57 @@ const CalculatorWrapper = (props)=>(
           &#9587;
          </Btn>
          <Btn
-          x={props.addValueFn}
+          onClickFn={props.addValueToArrayOfNumbers}
           value="4">
             4
          </Btn>
          <Btn
-         x={props.addValueFn}
+         onClickFn={props.addValueToArrayOfNumbers}
          value="5">
             5
          </Btn>
          <Btn
-         x={props.addValueFn}
+         onClickFn={props.addValueToArrayOfNumbers}
           value="6">
            6
          </Btn>
-         <Btn>
+         <Btn
+          id="minus"
+          onClickFn={e=>props.add(e)}>
            &#9472;
          </Btn>
          <Btn
-         x={props.addValueFn}
+         onClickFn={props.addValueToArrayOfNumbers}
          value="7">
            7
          </Btn>
          <Btn
-         x={props.addValueFn}
+         onClickFn={props.addValueToArrayOfNumbers}
          value="8">
            8
          </Btn>
          <Btn
-         x={props.addValueFn}
+         onClickFn={props.addValueToArrayOfNumbers}
           value="9">
            9
          </Btn>
-         <Btn x={props.add}>
+         <Btn
+          id="plus"
+          onClickFn={e=>props.add(e)}>
            &#9535;
          </Btn>
          <Btn>
            <sup>+</sup>/<sub>-</sub>
          </Btn>
-         <Btn x={props.addValueFn}
+         <Btn onClickFn={props.addValueToArrayOfNumbers}
           value="0">
            0
          </Btn>
-         <Btn x={props.addValueFn}
+         <Btn onClickFn={props.addValueToArrayOfNumbers}
           value=".">
            ,
          </Btn>
-         <Btn x={props.equal}>
+         <Btn onClickFn={props.equal}>
            =
          </Btn>
     </div>
