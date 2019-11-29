@@ -64,7 +64,7 @@ const CalculatorWrapper = (props)=>(
          </Btn>
          <Btn
           id="minus"
-          onClickFn={e=>props.add(e)}>
+          onClickFn={e=>props.doSymbolTask(e)}>
            &#9472;
          </Btn>
          <Btn
@@ -84,7 +84,7 @@ const CalculatorWrapper = (props)=>(
          </Btn>
          <Btn
           id="plus"
-          onClickFn={e=>props.add(e)}>
+          onClickFn={e=>props.doSymbolTask(e)}>
            &#9535;
          </Btn>
          <Btn>

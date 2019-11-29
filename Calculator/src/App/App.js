@@ -16,6 +16,7 @@ class App extends React.Component{
         this.state.arr[lengthOfArr] += e.target.value;
         this.handleValueUpdate(e);
         this.forceUpdate();    
+        
     }
 
     handleValueUpdate = (e) =>{
@@ -33,11 +34,12 @@ class App extends React.Component{
 
     doMathFn(operator){
         
-        const  result = this.doSpecificMathFn(operator, this.state.arr);       
+        const  result = this.doSpecificMathFn(operator, this.state.arr);  
+        console.log(result);     
         
         this.setState({
             value:result,
-            arr: [""],
+            arr: [result],
             plusState:false,
         })
     }
@@ -78,8 +80,7 @@ class App extends React.Component{
        return result;
     }
 
-    handleAddingFn = (e) =>{
-        console.log(e.target.id)
+    handleMathOperations = (e) =>{
         const currentOperator = this.getOperatorState(e.target.id);
    
         if(currentOperator.valueOfThisState){
@@ -88,14 +89,52 @@ class App extends React.Component{
                 [currentOperator.stateId]:false,
             })
         }else{
+            const info = this.checkIfNotSecondOperatorActive();
             this.setState((prevState,porps) =>({
                 arr :[...prevState.arr, ""],
                 [currentOperator.stateId]: true,
                 operator: currentOperator.symbol,
+                value: prevState.arr[0],
             }))
-            this.setValueToEmptyString();
+            if(info){
+                this.setValueToEmptyString();
+            }else{
+                //To do add event lisnter to clean the string :
+                setTimeout(this.setValueToEmptyString, 10000)
+            }
+
+        
         }
         
+    }
+
+    checkIfNotSecondOperatorActive = () => {
+        const shortName = this.state;
+        if(!shortName.plusState && !shortName.minusState){
+            return true;
+        }else{
+            this.doMathFn(this.getActiveOperator());
+            this.setAllSymbolStatesToFalse();
+            return false;
+        }
+    }
+    
+    getActiveOperator(){
+        if(this.state.minusState)
+        {
+            return "minus"
+        }
+        else if(this.state.plusState)
+        {
+            return "plus"
+        }
+    }
+
+    setAllSymbolStatesToFalse = () =>{
+        this.setState(prevState => ({
+            plusState:false,
+            minusState:false,
+        }))
     }
 
     getOperatorState =(id) =>({
@@ -105,9 +144,6 @@ class App extends React.Component{
             valueOfThisState: eval(`this.state.${id}State`)
     })
 
-    handleMinusFn = () => {
-
-    }
 
     handleEqualFn = () =>{
        this.doMathFn(this.state.operator)
@@ -118,7 +154,7 @@ class App extends React.Component{
             <>
              <h1>Hello</h1>
             <CalcWrapper 
-            add={this.handleAddingFn} 
+            doSymbolTask={this.handleMathOperations} 
             valueOfInput={this.state.value} 
             henge={this.handleValueUpdate} 
             equal={this.handleEqualFn}
