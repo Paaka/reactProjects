@@ -26,25 +26,35 @@ class App extends React.Component{
     }
 
     cleanCurrentItemFn = () => {
+        const cleanValue = "";
         const returnObj = this.getCurrentLengthAndItemFromArr();
-        let copyOfArr = JSON.parse(JSON.stringify(this.state.arr));
-        copyOfArr[returnObj.currentIndex]="";
+        const copyOfArr = this.createCopyAndReturnPreparedObjectToInsert(cleanValue,returnObj.currentIndex)
         this.setState(prevState => ({
             arr:copyOfArr,
             value:"",
         }))
     }
 
-    popLastLetterOfCurrentIndex = () =>{
+    backspaceFn = () =>{
         const returnObj = this.getCurrentLengthAndItemFromArr();
-        let copyOfArr = JSON.parse(JSON.stringify(this.state.arr));
-        let str = this.state.arr[returnObj.currentIndex];
-        str = str.substring(0, str.length - 1);
-        copyOfArr[returnObj.currentIndex]=str;
+        const str = this.popLastLetterOfCurrentIndex(returnObj.currentIndex)
+        const copyOfArr = this.createCopyAndReturnPreparedObjectToInsert(str, returnObj.currentIndex)
         this.setState(prevState => ({
             arr:copyOfArr,
             value:str,
         }))
+    }
+
+    popLastLetterOfCurrentIndex = (index) =>{
+        let str = this.state.arr[index];
+        str = str.toString().substring(0, str.length - 1);
+        return str;
+    }
+
+    createCopyAndReturnPreparedObjectToInsert = (value, index) =>{
+        let copyOfArr = JSON.parse(JSON.stringify(this.state.arr));
+        copyOfArr[index]=value;
+        return copyOfArr;
     }
 
     getCurrentLengthAndItemFromArr = () =>{
@@ -202,7 +212,7 @@ class App extends React.Component{
             valueOfInput={this.state.value} 
             cleanState={this.cleanStateFn}
             cleanItem={this.cleanCurrentItemFn}
-            trim={this.popLastLetterOfCurrentIndex}
+            trim={this.backspaceFn}
             henge={this.handleValueUpdate} 
             equal={this.handleEqualFn}
             addValueToArrayOfNumbers={this.addValueToArrayOfNumbers}></CalcWrapper>
