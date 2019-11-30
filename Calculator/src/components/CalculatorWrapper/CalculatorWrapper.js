@@ -17,13 +17,13 @@ const CalculatorWrapper = (props)=>(
          <Btn>
              <sup>1</sup>/<sub>x</sub>
          </Btn>
-         <Btn>
+         <Btn onClickFn={props.cleanState}>
              CE
          </Btn>
-         <Btn>
+         <Btn onClickFn={props.cleanItem}>
              C
          </Btn>
-         <Btn>
+         <Btn onClickFn={props.trim}>
            &#8678;
          </Btn>
          <Btn>

@@ -9,7 +9,51 @@ class App extends React.Component{
         operator : "plus",
         plusState: false,
         minusState:false,
+        divideState:false,
+        timesState:false,
     }   
+
+    cleanStateFn = () => {
+        this.setState({
+            arr:[""],
+            value:"",
+            operator : "plus",
+            plusState: false,
+            minusState:false,
+            divideState:false,
+            timesState:false,
+        })
+    }
+
+    cleanCurrentItemFn = () => {
+        const returnObj = this.getCurrentLengthAndItemFromArr();
+        let copyOfArr = JSON.parse(JSON.stringify(this.state.arr));
+        copyOfArr[returnObj.currentIndex]="";
+        this.setState(prevState => ({
+            arr:copyOfArr,
+            value:"",
+        }))
+    }
+
+    popLastLetterOfCurrentIndex = () =>{
+        const returnObj = this.getCurrentLengthAndItemFromArr();
+        let copyOfArr = JSON.parse(JSON.stringify(this.state.arr));
+        let str = this.state.arr[returnObj.currentIndex];
+        str = str.substring(0, str.length - 1);
+        copyOfArr[returnObj.currentIndex]=str;
+        this.setState(prevState => ({
+            arr:copyOfArr,
+            value:str,
+        }))
+    }
+
+    getCurrentLengthAndItemFromArr = () =>{
+       const lengthOfArr = this.state.arr.length-1;
+       return {
+           currentIndex: lengthOfArr,
+           currentItem : this.state.arr[lengthOfArr],
+       }
+    }
 
     addValueToArrayOfNumbers = (e) =>{
         const lengthOfArr = this.state.arr.length-1;
@@ -156,6 +200,9 @@ class App extends React.Component{
             <CalcWrapper 
             doSymbolTask={this.handleMathOperations} 
             valueOfInput={this.state.value} 
+            cleanState={this.cleanStateFn}
+            cleanItem={this.cleanCurrentItemFn}
+            trim={this.popLastLetterOfCurrentIndex}
             henge={this.handleValueUpdate} 
             equal={this.handleEqualFn}
             addValueToArrayOfNumbers={this.addValueToArrayOfNumbers}></CalcWrapper>
