@@ -86,11 +86,9 @@ class App extends React.Component{
         }))
     }
 
-    doMathFn(operator){
-        
-        const  result = this.doSpecificMathFn(operator, this.state.arr);  
-        console.log(result);     
-        
+    takeOperatorAndSetValue(operator){  
+        const  result = this.doSpecificMathFn(operator, this.state.arr);    
+
         this.setState({
             value:result,
             arr: [result],
@@ -98,21 +96,26 @@ class App extends React.Component{
         })
     }
 
-    doSpecificMathFn(operator, arr){
-       let result = 0;
-       let firstItem, secondItem;
-       if(arr[0] === ""){
-            firstItem = 0;
-       }else{
-        firstItem = parseFloat(arr[0]);
-       }
-       if(arr[1] === ""){
-           secondItem = 0;
-       }else{
-         secondItem = parseFloat(arr[1]);
-       }   
-       
-       switch(operator){
+    doSpecificMathFn(operator, arr){       
+       const firstItem = this.validateItemIfEmptyAndParseIntoFloat(arr[0]);
+       const secondItem = this.validateItemIfEmptyAndParseIntoFloat(arr[1]); 
+       const result = this.chooseOperatorAndDoOperation(operator,firstItem,secondItem);
+       return result;
+    }
+
+    validateItemIfEmptyAndParseIntoFloat(item){
+        let temporaryItem;
+        if(item === ""){
+            temporaryItem = 0;
+        }else{
+        temporaryItem = parseFloat(item);
+        }
+        return temporaryItem;
+    }
+
+    chooseOperatorAndDoOperation = (symbol,firstItem,secondItem) => {
+        let result = 0;
+        switch(symbol){
             case "plus":{
                 result = firstItem + secondItem;;   
                 break;   
@@ -124,21 +127,19 @@ class App extends React.Component{
             case "times":{
                 result = firstItem * secondItem;;
                 break;
+            }      
+            default:{
+                console.log('Error');
             }
-                
-                   default:{
-                       console.log('Error');
-                   }
-                }
-
-       return result;
+        }
+        return result;
     }
 
     handleMathOperations = (e) =>{
         const currentOperator = this.getOperatorState(e.target.id);
    
         if(currentOperator.valueOfThisState){
-            this.doMathFn(this.state.operator);
+            this.takeOperatorAndSetValue(this.state.operator);
             this.setState({
                 [currentOperator.stateId]:false,
             })
@@ -167,7 +168,7 @@ class App extends React.Component{
         if(!shortName.plusState && !shortName.minusState){
             return true;
         }else{
-            this.doMathFn(this.getActiveOperator());
+            this.takeOperatorAndSetValue(this.getActiveOperator());
             this.setAllSymbolStatesToFalse();
             return false;
         }
@@ -188,6 +189,8 @@ class App extends React.Component{
         this.setState(prevState => ({
             plusState:false,
             minusState:false,
+            divideState:false,
+            timesState:false,
         }))
     }
 
@@ -198,9 +201,10 @@ class App extends React.Component{
             valueOfThisState: eval(`this.state.${id}State`)
     })
 
+    
 
     handleEqualFn = () =>{
-       this.doMathFn(this.state.operator)
+       this.takeOperatorAndSetValue(this.state.operator)
     }
 
     render(){
