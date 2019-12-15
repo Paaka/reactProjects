@@ -127,7 +127,14 @@ class App extends React.Component{
             case "times":{
                 result = firstItem * secondItem;;
                 break;
-            }      
+            }  
+            case "divide":{
+                if(secondItem !== 0){
+                    result = firstItem / secondItem;;
+                }
+                result = `Number can't be devided by zero`
+                break;
+            }     
             default:{
                 console.log('Error');
             }
@@ -201,10 +208,27 @@ class App extends React.Component{
             valueOfThisState: eval(`this.state.${id}State`)
     })
 
-    
-
     handleEqualFn = () =>{
        this.takeOperatorAndSetValue(this.state.operator)
+    }
+
+    intensifiesItem = () =>{
+        const arrayOfItems = this.getCurrentLengthAndItemFromArr();
+        const itemToSquare = arrayOfItems.currentItem * arrayOfItems.currentItem;
+        this.setState(prevState => {
+            const array = prevState.arr;
+            array[arrayOfItems.currentIndex] = itemToSquare
+           return{
+            arr: array,
+            value: itemToSquare,
+           }
+           
+        })
+    }
+
+
+    squareRootFn = () =>{
+        
     }
 
     render(){
@@ -216,6 +240,7 @@ class App extends React.Component{
             valueOfInput={this.state.value} 
             cleanState={this.cleanStateFn}
             cleanItem={this.cleanCurrentItemFn}
+            intensifies={this.intensifiesItem}
             trim={this.backspaceFn}
             henge={this.handleValueUpdate} 
             equal={this.handleEqualFn}

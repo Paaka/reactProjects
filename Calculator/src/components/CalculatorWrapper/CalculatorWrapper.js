@@ -11,7 +11,7 @@ const CalculatorWrapper = (props)=>(
          <Btn>
              &radic;
          </Btn>
-         <Btn>
+         <Btn onClickFn={props.intensifies}>
              x<sup>2</sup>
          </Btn>
          <Btn>
@@ -26,7 +26,7 @@ const CalculatorWrapper = (props)=>(
          <Btn onClickFn={props.trim}>
            &#8678;
          </Btn>
-         <Btn>
+         <Btn id="divide" onClickFn={e=>props.doSymbolTask(e)}>
           &#8725;
          </Btn>
          <Btn 
@@ -44,7 +44,7 @@ const CalculatorWrapper = (props)=>(
         value="3">
              3
          </Btn>
-         <Btn>
+         <Btn id="times" onClickFn={e=>props.doSymbolTask(e)}>
           &#9587;
          </Btn>
          <Btn
