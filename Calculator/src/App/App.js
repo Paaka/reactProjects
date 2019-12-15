@@ -135,6 +135,16 @@ class App extends React.Component{
                 result = `Number can't be devided by zero`
                 break;
             }     
+            case "exponentiation":{
+                result = firstItem * firstItem;
+                break;
+            }
+            case "squareRoot":{
+                if(firstItem !== 0){
+                    result = Math.sqrt(firstItem);
+                }
+                break;
+            }
             default:{
                 console.log('Error');
             }
@@ -212,20 +222,20 @@ class App extends React.Component{
        this.takeOperatorAndSetValue(this.state.operator)
     }
 
-    intensifiesItem = () =>{
+    intensifiesItem = (e) =>{
         const arrayOfItems = this.getCurrentLengthAndItemFromArr();
-        const itemToSquare = arrayOfItems.currentItem * arrayOfItems.currentItem;
+        const operatorType = e.target.id;
+        const valueAfterOperation = this.chooseOperatorAndDoOperation(operatorType, arrayOfItems.currentItem);
         this.setState(prevState => {
             const array = prevState.arr;
-            array[arrayOfItems.currentIndex] = itemToSquare
+            array[arrayOfItems.currentIndex] = valueAfterOperation
            return{
             arr: array,
-            value: itemToSquare,
+            value: valueAfterOperation,
            }
            
         })
     }
-
 
     squareRootFn = () =>{
         

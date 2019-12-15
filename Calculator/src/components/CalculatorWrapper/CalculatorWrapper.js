@@ -8,10 +8,10 @@ const CalculatorWrapper = (props)=>(
          <Btn>
               %
          </Btn>
-         <Btn>
+         <Btn id="squareRoot" onClickFn={props.intensifies}>
              &radic;
          </Btn>
-         <Btn onClickFn={props.intensifies}>
+         <Btn id="exponentiation" onClickFn={props.intensifies}>
              x<sup>2</sup>
          </Btn>
          <Btn>
