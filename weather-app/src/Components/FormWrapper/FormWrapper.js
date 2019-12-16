@@ -1,10 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styles from './FormWrapper.module.scss';
+import Card from './Card/Card';
 
 class FormWrapper extends React.Component{
     state = {
         inputValue:"",
+        opwApiKey :  '50d53005c0fd5f556bb4ef15224c4209'
     }
+
+
     updateInputValue(e){
         this.setState({
             inputValue:e.target.value,
@@ -12,7 +17,14 @@ class FormWrapper extends React.Component{
     }
     checkWeatherInLocation(e){
         e.preventDefault();
-        console.log(this.state.inputValue)
+        const openWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${this.state.inputValue}&APPID=${this.state.opwApiKey}`;
+        const weather = fetch(openWeatherUrl);
+        weather
+        .then((respObject)=>{return respObject.json()})
+        .then(pogoda=>{
+            ReactDOM.render(<Card weatherObj={pogoda} />, document.getElementById('Card'));
+        })
+        
     }
 
     render(){
@@ -24,6 +36,7 @@ class FormWrapper extends React.Component{
                 <input 
                     id="location" 
                     className={styles.FormWrapper__input}
+                    required
                     type="text"
                     onChange={(e)=>this.updateInputValue(e)} ></input>
                 <button 
