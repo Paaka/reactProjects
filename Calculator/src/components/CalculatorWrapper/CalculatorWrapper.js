@@ -4,17 +4,17 @@ import Btn from '../Button/Button';
 
 const CalculatorWrapper = (props)=>(
     <div className={styles.wrapper}>
-        <input className={styles.input} value={props.valueOfInput} onChange={props.henge}></input>
-         <Btn>
+        <input className={styles.input} value={props.valueOfInput} onChange={props.changeValue}></input>
+         <Btn  id="percentage" onClickFn={props.unusualTasks}>
               %
          </Btn>
-         <Btn id="squareRoot" onClickFn={props.intensifies}>
+         <Btn id="squareRoot" onClickFn={props.unusualTasks}>
              &radic;
          </Btn>
-         <Btn id="exponentiation" onClickFn={props.intensifies}>
+         <Btn id="exponentiation" onClickFn={props.unusualTasks}>
              x<sup>2</sup>
          </Btn>
-         <Btn>
+         <Btn id="revelsal" onClickFn={props.unusualTasks}>
              <sup>1</sup>/<sub>x</sub>
          </Btn>
          <Btn onClickFn={props.cleanState}>
@@ -87,7 +87,7 @@ const CalculatorWrapper = (props)=>(
           onClickFn={e=>props.doSymbolTask(e)}>
            &#9535;
          </Btn>
-         <Btn>
+         <Btn Btn id="negation" onClickFn={props.unusualTasks}>
            <sup>+</sup>/<sub>-</sub>
          </Btn>
          <Btn onClickFn={props.addValueToArrayOfNumbers}

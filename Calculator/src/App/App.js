@@ -74,9 +74,14 @@ class App extends React.Component{
     }
 
     handleValueUpdate = (e) =>{
-        const magic = e.target.value;
+        const value = e.target.value;
+        const currentIndex= this.getCurrentLengthAndItemFromArr().currentIndex;
+        const copyOfArr = this.createCopyAndReturnPreparedObjectToInsert(value, currentIndex)
+        // const copyOfArr = this.state.arr;
+        // copyOfArr[result.currentIndex] = value;
         this.setState((prevState) => ({
-            value:prevState.value + magic
+            value:value,
+            arr:copyOfArr,
         }))
     }
 
@@ -86,20 +91,25 @@ class App extends React.Component{
         }))
     }
 
-    takeOperatorAndSetValue(operator){  
+    takeOperatorAndSetValue(operator = this.state.operator){ 
         const  result = this.doSpecificMathFn(operator, this.state.arr);    
-
         this.setState({
             value:result,
             arr: [result],
             plusState:false,
+            minusState:false,
+            divideState:false,
+            timesState:false,
         })
     }
 
     doSpecificMathFn(operator, arr){       
        const firstItem = this.validateItemIfEmptyAndParseIntoFloat(arr[0]);
        const secondItem = this.validateItemIfEmptyAndParseIntoFloat(arr[1]); 
-       const result = this.chooseOperatorAndDoOperation(operator,firstItem,secondItem);
+       let result = this.chooseOperatorAndDoOperation(operator,firstItem,secondItem);
+       if(isNaN(result)){
+           result = firstItem;
+       }
        return result;
     }
 
@@ -129,10 +139,11 @@ class App extends React.Component{
                 break;
             }  
             case "divide":{
-                if(secondItem !== 0){
-                    result = firstItem / secondItem;;
+                console.log(secondItem)
+                if(secondItem === 0){
+                    result = `Number can't be devided by zero`
                 }
-                result = `Number can't be devided by zero`
+                   result = firstItem / secondItem;
                 break;
             }     
             case "exponentiation":{
@@ -143,6 +154,19 @@ class App extends React.Component{
                 if(firstItem !== 0){
                     result = Math.sqrt(firstItem);
                 }
+                break;
+            }
+            case "negation":{
+                result = parseFloat(firstItem) * -1;
+                break;
+            }
+            case "revelsal":{
+                result = 1/firstItem;
+                break;
+            }
+            case "percentage":{
+                console.log(secondItem, firstItem)
+                result = (parseFloat(secondItem)/100) *parseFloat(firstItem);
                 break;
             }
             default:{
@@ -161,7 +185,7 @@ class App extends React.Component{
                 [currentOperator.stateId]:false,
             })
         }else{
-            const info = this.checkIfNotSecondOperatorActive();
+            const info = this.checkIfNotSecondOperatorActive(e.target.id);
             this.setState((prevState,porps) =>({
                 arr :[...prevState.arr, ""],
                 [currentOperator.stateId]: true,
@@ -180,27 +204,17 @@ class App extends React.Component{
         
     }
 
-    checkIfNotSecondOperatorActive = () => {
-        const shortName = this.state;
-        if(!shortName.plusState && !shortName.minusState){
+    checkIfNotSecondOperatorActive = (id) => {
+        const state = this.state;
+        if(!state.plusState && !state.minusState && !state.timesState  && !state.divideState){
             return true;
         }else{
-            this.takeOperatorAndSetValue(this.getActiveOperator());
+            this.takeOperatorAndSetValue(id);
             this.setAllSymbolStatesToFalse();
             return false;
         }
     }
     
-    getActiveOperator(){
-        if(this.state.minusState)
-        {
-            return "minus"
-        }
-        else if(this.state.plusState)
-        {
-            return "plus"
-        }
-    }
 
     setAllSymbolStatesToFalse = () =>{
         this.setState(prevState => ({
@@ -218,42 +232,41 @@ class App extends React.Component{
             valueOfThisState: eval(`this.state.${id}State`)
     })
 
-    handleEqualFn = () =>{
-       this.takeOperatorAndSetValue(this.state.operator)
-    }
 
-    intensifiesItem = (e) =>{
+    firstRowActionsAndReversalFn= (e) =>{
         const arrayOfItems = this.getCurrentLengthAndItemFromArr();
         const operatorType = e.target.id;
-        const valueAfterOperation = this.chooseOperatorAndDoOperation(operatorType, arrayOfItems.currentItem);
+        const value = this.determinateIfEventIsPercentage(arrayOfItems, operatorType);
         this.setState(prevState => {
-            const array = prevState.arr;
-            array[arrayOfItems.currentIndex] = valueAfterOperation
+            const updatedArray = this.createCopyAndReturnPreparedObjectToInsert(value, arrayOfItems.currentIndex)
            return{
-            arr: array,
-            value: valueAfterOperation,
-           }
-           
+            arr: updatedArray,
+            value: value,
+           }   
         })
     }
 
-    squareRootFn = () =>{
-        
+    determinateIfEventIsPercentage = (array, operator) =>{
+        const checkIfThisIsPercentage = 1;
+        if(array.currentIndex === checkIfThisIsPercentage){
+             return this.chooseOperatorAndDoOperation(operator, this.state.arr[array.currentIndex-1], array.currentItem);
+        }else{
+             return this.chooseOperatorAndDoOperation(operator, array.currentItem);
+        }
     }
 
     render(){
         return(
             <>
-             <h1>Hello</h1>
             <CalcWrapper 
             doSymbolTask={this.handleMathOperations} 
             valueOfInput={this.state.value} 
             cleanState={this.cleanStateFn}
             cleanItem={this.cleanCurrentItemFn}
-            intensifies={this.intensifiesItem}
+            unusualTasks={this.firstRowActionsAndReversalFn}
             trim={this.backspaceFn}
-            henge={this.handleValueUpdate} 
-            equal={this.handleEqualFn}
+            changeValue={this.handleValueUpdate} 
+            equal={() =>this.takeOperatorAndSetValue()}
             addValueToArrayOfNumbers={this.addValueToArrayOfNumbers}></CalcWrapper>
             </>
         )
