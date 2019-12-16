@@ -1,0 +1,56 @@
+.FormWrapper{
+    border: 2px solid #eee;
+    padding: 3rem;
+    margin-top: 3rem;
+    width: 40%;
+    form{
+        display: grid;
+        grid-template-rows: repeat(4, 40px);
+        gap: 3px;
+    }
+    
+
+    &__header{
+        grid-row: 1/1;
+        color:#eee;
+        margin-bottom: 3rem;
+        justify-self: center;
+        font-weight: 400;
+        font-size: 1.8rem;
+    }
+    &__label{
+        grid-row: 2/2;
+        align-self: flex-end;
+        color:#eee;
+        font-size: 1.5rem;
+        margin-left: 1rem;
+    }
+    &__input{
+        grid-row: 3;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid #eee;
+        outline: none;
+        border-width: 50%;
+        margin: 3px 1rem;
+        font-size: 1.6rem;
+        :active{
+            border-bottom: 2px solid royalblue;
+        }
+    }
+    &__btn{
+        grid-row: 4;
+        width: 80%;
+        margin: 0 auto;
+        font-size: 2rem;
+        border: 2px solid #eeeeee;
+        background-color: transparent;
+        color: #eee;
+
+        &:hover{
+            background-color: #eee;
+            border: 2px solid #333;
+            color: #333;
+        }
+    }
+}
