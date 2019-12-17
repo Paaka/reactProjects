@@ -12,6 +12,7 @@ class App extends React.Component {
  
   showPosition(position) {
     console.log(position)
+    
   }
   render(){
     return(

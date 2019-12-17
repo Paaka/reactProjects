@@ -1,4 +1,5 @@
 import React from 'react';
+import Style from './Card.module.scss';
 
 const Card = (props) =>{
    const weather = props.weatherObj;
@@ -14,11 +15,11 @@ const Card = (props) =>{
     const icon = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
     console.log()
     return(
-            <div>
-                <h2>{location}</h2>
+            <div className={Style.card}>
+                <h2 className={Style.card__heading}>{location}</h2>
                 <img alt="weather" src={icon}></img>
-                <p>Current temperature:{temperature}&#176;C</p>
-                <p>Feels Like:{tempFeelsLike}&#176;C</p>
+                <p className={Style.card__padding}>Current temperature:{temperature}&#176;C</p>
+                <p className={Style.card__padding}>Feels Like:{tempFeelsLike}&#176;C</p>
             </div>
         );;
 }

@@ -6,7 +6,8 @@ import Card from './Card/Card';
 class FormWrapper extends React.Component{
     state = {
         inputValue:"",
-        opwApiKey :  '50d53005c0fd5f556bb4ef15224c4209'
+        opwApiKey :  '50d53005c0fd5f556bb4ef15224c4209',
+        googleApi : 'AIzaSyC11_1DCGLZ4U_aw9Oqa-C6pAAx-M3jrws',
     }
 
 
