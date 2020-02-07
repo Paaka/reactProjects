@@ -10,6 +10,7 @@ export const theme = {
   bold: 600,
   headingSize: '32px',
   headingSizeSmall: '24px',
+  paraSize: '16px',
   s: '15px',
   xs: '12px',
 };
