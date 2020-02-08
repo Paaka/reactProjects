@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../../../Theme/GlobalStyle';
 import { theme } from '../../../Theme/mainTheme';
+import PropTypes from 'prop-types';
 
 const MainTemplate = ({ children }) => (
   <>
@@ -12,3 +13,7 @@ const MainTemplate = ({ children }) => (
   </>
 );
 export default MainTemplate;
+
+MainTemplate.propTypes = {
+  children: PropTypes.element.isRequired,
+};
