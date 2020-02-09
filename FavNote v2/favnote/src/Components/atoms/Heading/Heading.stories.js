@@ -4,7 +4,7 @@ import Heading from './Heading';
 import { theme } from '../../../Theme/mainTheme';
 import { ThemeProvider } from 'styled-components';
 
-export default { title: 'Heading' };
+export default { title: 'Atoms/Heading' };
 
 export const heading = () => {
   return (

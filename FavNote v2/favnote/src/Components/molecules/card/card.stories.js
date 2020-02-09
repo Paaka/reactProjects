@@ -4,7 +4,7 @@ import GlobalStyle from '../../../Theme/GlobalStyle';
 import { theme } from '../../../Theme/mainTheme';
 import styled, { ThemeProvider } from 'styled-components';
 
-export default { title: 'Card' };
+export default { title: 'Molecules/Card' };
 
 export const noteCard = () => {
   return (

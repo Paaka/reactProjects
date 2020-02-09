@@ -4,7 +4,7 @@ import Search from './Search';
 import { theme } from '../../../Theme/mainTheme';
 import { ThemeProvider } from 'styled-components';
 
-export default { title: 'Search' };
+export default { title: 'Atoms/Search' };
 
 export const search = () => {
   return (

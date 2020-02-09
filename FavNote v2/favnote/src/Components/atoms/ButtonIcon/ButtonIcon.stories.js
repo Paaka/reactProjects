@@ -14,7 +14,7 @@ const YellowBackground = styled.div`
   background-color: yellow;
 `;
 
-export default { title: 'ButtonIcon' };
+export default { title: 'Atoms/ButtonIcon' };
 
 export const buttonIcon = () => {
   return (

@@ -3,7 +3,7 @@ import MainTemplate from './MainTemplate';
 import Button from '../../atoms/Button/Button';
 import { BrowserRouter } from 'react-router-dom';
 
-export default { title: 'Main Template' };
+export default { title: 'Templates/Main Template' };
 
 export const mainTemplate = () => {
   return (

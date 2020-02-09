@@ -3,7 +3,7 @@ import GlobalStyle from '../../../Theme/GlobalStyle';
 import Button from './Button';
 import { withKnobs, select } from '@storybook/addon-knobs';
 
-export default { title: 'Button', decorators: [withKnobs] };
+export default { title: 'Atoms/Button', decorators: [withKnobs] };
 
 export const primary = () => {
   const label = `Colors`;

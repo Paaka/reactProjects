@@ -4,7 +4,7 @@ import Paragraph from './Paragraph';
 import { theme } from '../../../Theme/mainTheme';
 import { ThemeProvider } from 'styled-components';
 
-export default { title: 'Paragraph' };
+export default { title: 'Atoms/Paragraph' };
 
 export const paragraph = () => {
   return (
