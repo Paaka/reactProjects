@@ -47,16 +47,16 @@ const SideBar = () => (
     <WrapperList>
       <div>
         <li>
-          <ButtonIcon exact as={NavLink} to="/" icon={penIcon} activeClass="active" />
+          <ButtonIcon exact as={NavLink} to="/" icon={penIcon} activeClassName="active" />
         </li>
         <li>
-          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClass="active" />
+          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClassName="active" />
         </li>
         <li>
-          <ButtonIcon as={NavLink} to="/articles" icon={lightbulbIcon} activeClass="active" />
+          <ButtonIcon as={NavLink} to="/articles" icon={lightbulbIcon} activeClassName="active" />
         </li>
       </div>
-      <ButtonIcon as={NavLink} to="/" icon={logoutIcon} />
+      <ButtonIcon as={NavLink} to="/exit" icon={logoutIcon} />
     </WrapperList>
   </Wrapper>
 );
