@@ -8,12 +8,7 @@ import Sidebar from '../../organisms/sidebar/sidebar';
 const MainTemplate = ({ children }) => (
   <>
     <GlobalStyle />
-    <ThemeProvider theme={theme}>
-      <>
-        <Sidebar></Sidebar>
-        {children}
-      </>
-    </ThemeProvider>
+    <ThemeProvider theme={theme}>{children}</ThemeProvider>
   </>
 );
 export default MainTemplate;

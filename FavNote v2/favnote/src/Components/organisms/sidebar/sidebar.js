@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   align-content: center;
   justify-content: space-between;
   width: 153px;
-  background-color: ${theme.note};
+  background-color: ${({ colorType }) => (colorType ? theme[colorType] : theme.note)};
   align-items: center;
   height: 100vh;
 `;
@@ -38,8 +38,8 @@ const LogoParagraphSmall = styled(LogoParagraphBig)`
   margin-top: -11px;
 `;
 
-const SideBar = () => (
-  <Wrapper>
+const SideBar = ({ colorType }) => (
+  <Wrapper colorType={colorType}>
     <LogoWrapper>
       <LogoParagraphBig>FAV</LogoParagraphBig>
       <LogoParagraphSmall>Note</LogoParagraphSmall>
@@ -56,8 +56,8 @@ const SideBar = () => (
           <ButtonIcon as={NavLink} to="/articles" icon={lightbulbIcon} activeClassName="active" />
         </li>
       </div>
-      <ButtonIcon as={NavLink} to="/exit" icon={logoutIcon} />
     </WrapperList>
+    <ButtonIcon as={NavLink} to="/exit" icon={logoutIcon} />
   </Wrapper>
 );
 
