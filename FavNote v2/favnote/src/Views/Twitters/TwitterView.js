@@ -1,9 +1,37 @@
 import React from 'react';
 import UserPageTemplate from '../../Components/templates/UserPageTemplate/UserPageTemplate';
+import Card from '../../Components/molecules/card/card';
 
 const TwittersView = () => (
   <UserPageTemplate pageType="twitter">
-    <h1>This is Twitters View</h1>
+    <Card
+      cardType="twitter"
+      title="No nieźle"
+      created="3 days ago"
+      content="Something..."
+      twitterName="https://avatars.io/static/default_128.jpg"
+    ></Card>
+    <Card
+      cardType="twitter"
+      title="No nieźle"
+      created="3 days ago"
+      content="Something..."
+      twitterName="https://avatars.io/static/default_128.jpg"
+    ></Card>
+    <Card
+      cardType="twitter"
+      title="No nieźle"
+      created="3 days ago"
+      content="Something..."
+      twitterName="https://avatars.io/static/default_128.jpg"
+    ></Card>
+    <Card
+      cardType="twitter"
+      title="No nieźle"
+      created="3 days ago"
+      content="Something..."
+      twitterName="https://avatars.io/static/default_128.jpg"
+    ></Card>
   </UserPageTemplate>
 );
 

@@ -61,22 +61,16 @@ const LinkIcon = styled.a`
   background-image: url(${() => iconLink});
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({ cardType, title, created, twitterName, articleURL, content }) => (
   <Wrapper>
     <InnerWrapper activeColor={cardType}>
-      <Headimg>Hello Matt</Headimg>
-      <DaysCounter> 3 days</DaysCounter>
-      {cardType === 'twitter' ? (
-        <TwitterAvatar src="https://avatars.io/static/default_128.jpg"></TwitterAvatar>
-      ) : null}
-      {cardType === 'article' ? (
-        <LinkIcon href="https://www.youtube.com/watch?v=u21W_tfPVrY"></LinkIcon>
-      ) : null}
+      <Headimg>{title}</Headimg>
+      <DaysCounter>{created}</DaysCounter>
+      {cardType === 'twitter' ? <TwitterAvatar src={twitterName}></TwitterAvatar> : null}
+      {cardType === 'article' ? <LinkIcon href={articleURL}></LinkIcon> : null}
     </InnerWrapper>
     <InnerWrapper flex>
-      <Paragraph>
-        Lorem ipsum ut fugiat cupidatat minim fugiat cupidatat et ipsum occaecat eu magna.
-      </Paragraph>
+      <Paragraph>{content}</Paragraph>
       <Button secondary>DELET DIS</Button>
     </InnerWrapper>
   </Wrapper>
@@ -84,9 +78,16 @@ const Card = ({ cardType }) => (
 
 Card.propTypes = {
   cardType: PropTypes.oneOf('note', 'twitter', 'article'),
+  content: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleURL: PropTypes.string,
 };
 
 Card.defaultProps = {
   cardType: 'note',
+  twitterName: null,
+  articleURL: null,
 };
 export default Card;

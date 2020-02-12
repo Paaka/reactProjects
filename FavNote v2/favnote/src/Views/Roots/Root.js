@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import MainTheme from '../../Components/templates/MainTemplate/MainTemplate';
 import NotesView from '../Notes/NotesView';
 import TwittersView from '../Twitters/TwitterView';
@@ -11,7 +11,8 @@ const Root = () => (
     <BrowserRouter>
       <MainTheme>
         <Switch>
-          <Route exact path="/" component={NotesView}></Route>
+          <Route exact path="/" render={() => <Redirect to="/Notes"></Redirect>} />
+          <Route path="/Notes" component={NotesView}></Route>
           <Route path="/Twitters" component={TwittersView}></Route>
           <Route path="/Articles" component={ArticleView}></Route>
         </Switch>

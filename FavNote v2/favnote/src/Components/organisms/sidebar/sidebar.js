@@ -16,7 +16,8 @@ const Wrapper = styled.div`
   width: 153px;
   background-color: ${({ colorType }) => (colorType ? theme[colorType] : theme.note)};
   align-items: center;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 `;
 
 const WrapperList = styled.ul`
@@ -47,7 +48,7 @@ const SideBar = ({ colorType }) => (
     <WrapperList>
       <div>
         <li>
-          <ButtonIcon exact as={NavLink} to="/" icon={penIcon} activeClassName="active" />
+          <ButtonIcon exact as={NavLink} to="/notes" icon={penIcon} activeClassName="active" />
         </li>
         <li>
           <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClassName="active" />
