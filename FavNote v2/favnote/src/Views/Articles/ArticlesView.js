@@ -1,9 +1,10 @@
 import React from 'react';
 import UserPageTemplate from '../../Components/templates/UserPageTemplate/UserPageTemplate';
 import Card from '../../Components/molecules/card/card';
+import GridViewTemplate from '../../Components/templates/GridViewTemplate/GridViewTemplate';
 
 const ArticleView = () => (
-  <UserPageTemplate pageType="article">
+  <GridViewTemplate pageType="article">
     <Card
       cardType="article"
       title="No nieźle"
@@ -46,7 +47,7 @@ const ArticleView = () => (
       content="Something..."
       articleURL="https://github.com/Paaka"
     ></Card>
-  </UserPageTemplate>
+  </GridViewTemplate>
 );
 
 export default ArticleView;
