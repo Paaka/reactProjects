@@ -2,38 +2,26 @@ import React from 'react';
 import UserPageTemplate from '../../Components/templates/UserPageTemplate/UserPageTemplate';
 import Card from '../../Components/molecules/card/card';
 import GridViewTemplate from '../../Components/templates/GridViewTemplate/GridViewTemplate';
+import { connect } from 'react-redux';
 
-const TwittersView = () => (
+const TwittersView = ({ twitters }) => (
   <GridViewTemplate pageType="twitter">
-    <Card
-      cardType="twitter"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      twitterName="https://avatars.io/static/default_128.jpg"
-    ></Card>
-    <Card
-      cardType="twitter"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      twitterName="https://avatars.io/static/default_128.jpg"
-    ></Card>
-    <Card
-      cardType="twitter"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      twitterName="https://avatars.io/static/default_128.jpg"
-    ></Card>
-    <Card
-      cardType="twitter"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      twitterName="https://avatars.io/static/default_128.jpg"
-    ></Card>
+    {twitters.map(({ id, title, created, content, twitterName }) => (
+      <Card
+        id={id}
+        cardType="twitter"
+        title={title}
+        created={created}
+        content={content}
+        twitterName={twitterName}
+      />
+    ))}
   </GridViewTemplate>
 );
 
-export default TwittersView;
+const mapStateToProps = state => {
+  const { twitters } = state;
+  return { twitters };
+};
+
+export default connect(mapStateToProps)(TwittersView);

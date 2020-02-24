@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '../../../Theme/mainTheme';
+import { Redirect } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Headimg from '../../atoms/Heading/Heading';
 import Button from '../../atoms/Button/Button';
@@ -61,23 +62,40 @@ const LinkIcon = styled.a`
   background-image: url(${() => iconLink});
 `;
 
-const Card = ({ cardType, title, created, twitterName, articleURL, content }) => (
-  <Wrapper>
-    <InnerWrapper activeColor={cardType}>
-      <Headimg>{title}</Headimg>
-      <DaysCounter>{created}</DaysCounter>
-      {cardType === 'twitter' ? <TwitterAvatar src={twitterName}></TwitterAvatar> : null}
-      {cardType === 'article' ? <LinkIcon href={articleURL}></LinkIcon> : null}
-    </InnerWrapper>
-    <InnerWrapper flex>
-      <Paragraph>{content}</Paragraph>
-      <Button secondary>DELET DIS</Button>
-    </InnerWrapper>
-  </Wrapper>
-);
+class Card extends Component {
+  state = {
+    redirect: false,
+  };
 
+  handleCardClick = () => this.setState({ redirect: true });
+
+  render() {
+    const { id, cardType, title, created, twitterName, articleURL, content } = this.props;
+
+    if (this.state.redirect) {
+      return <Redirect to={`${cardType}s/${id}`} />;
+    }
+    return (
+      <Wrapper onClick={this.handleCardClick}>
+        <InnerWrapper activeColor={cardType}>
+          <Headimg>
+            {id}
+            {title}
+          </Headimg>
+          <DaysCounter>{created}</DaysCounter>
+          {cardType === 'twitter' ? <TwitterAvatar src={twitterName}></TwitterAvatar> : null}
+          {cardType === 'article' ? <LinkIcon href={articleURL}></LinkIcon> : null}
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Paragraph>{content}</Paragraph>
+          <Button secondary>DELET DIS</Button>
+        </InnerWrapper>
+      </Wrapper>
+    );
+  }
+}
 Card.propTypes = {
-  cardType: PropTypes.oneOf('note', 'twitter', 'article'),
+  cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
   content: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,

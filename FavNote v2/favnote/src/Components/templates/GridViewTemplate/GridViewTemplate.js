@@ -43,7 +43,7 @@ const GridViewTemplate = ({ pageType, children }) => (
 );
 
 GridViewTemplate.propTypes = {
-  pageType: PropTypes.element.isRequired,
+  pageType: PropTypes.string.isRequired,
 };
 
 export default GridViewTemplate;

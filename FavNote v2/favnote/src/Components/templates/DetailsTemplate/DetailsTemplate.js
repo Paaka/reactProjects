@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import UserPageTemplate from '../UserPageTemplate/UserPageTemplate';
 
-const DetailsTemplate = ({ children }) => (
-  <UserPageTemplate>
+const DetailsTemplate = ({ children, pageType }) => (
+  <UserPageTemplate pageType={pageType}>
     <div>
       {children}
       <Link to="/">Go Back</Link>

@@ -10,7 +10,7 @@ const UserPageTemplate = ({ pageType, children }) => (
 );
 
 UserPageTemplate.propTypes = {
-  pageType: PropTypes.element.isRequired,
+  pageType: PropTypes.string.isRequired,
 };
 
 export default UserPageTemplate;

@@ -2,52 +2,36 @@ import React from 'react';
 import UserPageTemplate from '../../Components/templates/UserPageTemplate/UserPageTemplate';
 import Card from '../../Components/molecules/card/card';
 import GridViewTemplate from '../../Components/templates/GridViewTemplate/GridViewTemplate';
+import { connect } from 'react-redux';
 
-const ArticleView = () => (
+const ArticleView = ({ articles }) => (
   <GridViewTemplate pageType="article">
-    <Card
-      cardType="article"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      articleURL="https://github.com/Paaka"
-    ></Card>
-    <Card
-      cardType="article"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      articleURL="https://github.com/Paaka"
-    ></Card>
-    <Card
-      cardType="article"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      articleURL="https://github.com/Paaka"
-    ></Card>
-    <Card
-      cardType="article"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      articleURL="https://github.com/Paaka"
-    ></Card>
-    <Card
-      cardType="article"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      articleURL="https://github.com/Paaka"
-    ></Card>
-    <Card
-      cardType="article"
-      title="No nieźle"
-      created="3 days ago"
-      content="Something..."
-      articleURL="https://github.com/Paaka"
-    ></Card>
+    {articles.map(({ id, title, created, content, articleURL }) => (
+      <Card
+        id={id}
+        cardType="article"
+        title={title}
+        created={created}
+        content={content}
+        articleURL={articleURL}
+      />
+    ))}
   </GridViewTemplate>
 );
 
-export default ArticleView;
+const mapStateToProps = state => {
+  const { articles } = state;
+  return { articles };
+};
+
+{
+  /* <Card
+      id="1"
+      cardType="article"
+      title="No nieźle"
+      created="3 days ago"
+      content="Something..."
+      articleURL="https://github.com/Paaka"
+    ></Card> */
+}
+export default connect(mapStateToProps)(ArticleView);
